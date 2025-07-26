@@ -3,6 +3,9 @@ from news_api.client import fetch_news
 from utils.sentiment import filter_good_news
 from utils.display import display_news
 from utils.topics import generate_random_topic
+import nltk
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
 
 st.title("🌞 Positive News Generator")
 st.markdown("Discover uplifting stories from around the world")
