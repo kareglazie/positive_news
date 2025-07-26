@@ -26,9 +26,13 @@ def filter_good_news(articles):
     for article in articles:
         title = article.get("title", "")
         content = article.get("content", "") or article.get("description", "") or title
-        
-        negative_indicators = ["death", "war", "attack", "crisis", "murder"]
-        if any(word in title.lower() for word in negative_indicators):
+        content_lead = content[:500]
+        negative_indicators = ["death", "war", "attack", "crisis", "murder", "destroy", "attacks", "condemn", "murdered",
+                               "wars", "accuse", "accused", "investigation", "court", "destroyed", "condemned", "investigated",
+                               "prosecutor", "humiliation", "humiliate", "demolish", "destroys", "criticize", "criticized",
+                               "die", "dies", "died", "attacked", "humility", "burden", "homeless", "refugee", "refugees"]
+        if any(word in title for word in negative_indicators) or \
+           any(word in content_lead for word in negative_indicators):
             continue
             
         if analyze_sentiment(content) == "positive":
